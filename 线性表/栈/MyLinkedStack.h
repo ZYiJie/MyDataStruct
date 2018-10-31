@@ -1,58 +1,56 @@
 #include <iostream>
 #define TRUE 1
 using namespace std;
-typedef struct StockNode {
+typedef struct StackNode {
 	int data;
-	StockNode *p;
+	StackNode *p;
 };
-StockNode* InitStock() {
-	StockNode *top;
-	top = new(StockNode);
+StackNode* InitStack() {
+	StackNode *top;
+	top = new(StackNode);
 	top->p = NULL;
 	//cout << "Initialize successfully!" << endl;
 	return top;
 }
-int CheckEmpty(StockNode* top) {
+int CheckEmpty(StackNode* top) {
 	if (top->p == NULL) return 1;
 	return 0;
 }
-void Push(StockNode*top) {
-	StockNode *temp;
-	temp = new(StockNode);
+void PushInput(StackNode*top) {
+	StackNode *temp;
+	temp = new(StackNode);
 	cin >> temp->data;
 	temp->p = top->p;
 	top->p = temp;
 	//cout << top->p->data;
 }
-void Push2(StockNode*top,int n) {
-	StockNode *temp;
-	temp = new(StockNode);
+void PushNum(StackNode*top,int n) {
+	StackNode *temp;
+	temp = new(StackNode);
 	temp->data = n;
 	temp->p = top->p;
 	top->p = temp;
 	//cout << top->p->data;
 }
-void Pop(StockNode*top) {
+int Pop(StackNode*top) {
 	int result;
-	StockNode *temp;
-	if (!CheckEmpty(top)) {
+	StackNode *temp;
+	if (CheckEmpty(top)) {
+		cout << "The Stack is empty." << endl;
+		return 0;
+	}
 		temp = top->p;
 		result = temp->data;
 		top->p = temp->p;
 		delete(temp);
-		cout<< result<<endl;
-	}
-	else {
-		cout << "The stock is empty." << endl;
-	}
-	
+		return result;
 }
-void TraverseStock(StockNode*top) {
-	StockNode *temp = top->p;
+void TraverseStack(StackNode*top) {
+	StackNode *temp = top->p;
 	int i = 1;
 	while (temp != NULL) {
-		//cout << "NO." << i++ << " " << temp->data << endl;
-		cout  << temp->data ;
+		cout  << temp->data <<" ";
 		temp = temp->p;
 	}
+	cout<< endl;
 }

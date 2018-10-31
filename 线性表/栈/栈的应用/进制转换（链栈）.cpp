@@ -1,22 +1,22 @@
 #include <iostream>
 #include "MyLinkedStack.h"
 using namespace std;
-int main(){
-	int num,jinzhi;
-	StockNode *top;
+int main() {
+	int num, jinzhi;
+	StackNode *top;
 	cout << "Please choose radix: ";
 	cin >> jinzhi;
 	cout << "Please input number: ";
 	cin >> num;
 	cout << "The radix is: " << jinzhi << ", the number is: " << num << endl;
-	top = InitStock();
+	top = InitStack();
 	while (num) {
-		Push2(top, num%jinzhi);
+		PushNum(top, num%jinzhi);
 		num /= jinzhi;
 	}
-	Push2(top, num);
+	PushNum(top, num);
 	cout << "Result:";
-	TraverseStock(top);
+	TraverseStack(top);
 	getchar();
 	getchar();
 
