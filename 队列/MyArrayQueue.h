@@ -43,6 +43,12 @@ int Dequeue(QueueNode*top) {
 	return result;
 
 }
+void DeleteQueue(QueueNode*top) {
+	top->begin = top->last = 0;
+	cout << "Delete successfully!";
+	cout << endl;
+}
+
 void TraverseQueue(QueueNode*top) {
 	int i;
 	for (i = top->begin ; i<top->last; i++) cout << top->arr[i] << " ";

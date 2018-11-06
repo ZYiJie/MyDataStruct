@@ -47,6 +47,19 @@ int Dequeue(QueueNode*top) {
 	delete(temp);
 	return result;
 }
+void DeleteQueue(QueueNode*top) {
+	QueueNode *temp;
+	QueueNode *temp2=top->p;
+	while (temp2 != NULL) {
+		temp = temp2;
+		temp2 = temp->p;
+		delete(temp);
+	}
+	top->p = NULL;
+	cout << "Delete successfully!";
+	cout << endl;
+}
+
 void TraverseQueue(QueueNode*top) {
 	QueueNode *temp = top->p;
 	int i = 1;
