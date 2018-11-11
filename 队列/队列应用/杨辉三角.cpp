@@ -4,31 +4,31 @@ using namespace std;
 int main()
 {
 	int n;
-	int i = 0; //控制输出空格的数目
+	int i; //控制输出的数目
 	QueueNode *yanghui = InitQueue();
 	QueueNode *yanghui2 = InitQueue();
-	//EnqueueNum(yanghui, 1);
 	cout << "Please input the height:" << endl;
 	cin >> n;
-	for (; n; n--) {
+	//EnqueueNum(yanghui, 1); //初始化第一个值
+	//cout << "1" << endl;
+	
+	for (i=0;i<n; i++) {
+		for (int j = 0; j < (n - i )/2; j++) cout << "   ";//输出空格
 		int pre = 0;//先前一个数值
-		while (yanghui->p != NULL) {
+		while (yanghui->p!=NULL) {
 			int temp = Dequeue(yanghui);
 			EnqueueNum(yanghui2, temp + pre);
-			cout << temp;
+			printf("%3d",pre+temp);
 			pre = temp;
 		}
 		EnqueueNum(yanghui2, 1);
-		cout << 1<<endl;
-		yanghui = yanghui2;
-		DeleteQueue(yanghui2);
-		//while (true) {//输出队列中两两相加后的值
-		//	if (yanghui->p == NULL) {
-		//		cout<< Dequeue(yanghui)<<endl;
-		//		break;
-		//	}
-		//}
-	}
+		cout << "  1"<<endl;
+		while (yanghui2->p != NULL) {
+			//将yanghui2中储存的内容转移到yanghui1中以便下一次输出
+			int temp = Dequeue(yanghui2);
+			EnqueueNum(yanghui, temp);
+		}
+   	}
 	getchar();
 	getchar();
 	return 0;
