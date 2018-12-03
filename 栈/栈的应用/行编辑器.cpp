@@ -7,6 +7,7 @@ int main() {
 	stack <char> result;
 	cout << "Please input(* means stopping)" << endl;
 	while ((ch = getchar()) != '*') {
+		//输入#删除前一个字符；输入@删除之前整行；输入*结束
 		if (ch == '#') result.pop();
 		else if (ch == '@') {
 			char temp=result.top();
@@ -15,7 +16,7 @@ int main() {
 				result.pop();
 				temp = result.top();
 			}
-			result.pop();
+			result.pop();//用于删除多余的一个回车符
 		}
 		else result.push(ch);
 	}
