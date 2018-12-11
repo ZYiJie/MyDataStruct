@@ -53,7 +53,7 @@ int main() {
 	while (1) {
 		ch = getchar();
 		if (ch == '\n') break;
-		//if (ch < 'a') ch += 32;
+		if (ch < 'a') ch += 32;//´óÐ¡Ð´×ª»»
 		for (int j = 0; j < i; j++) {
 			if (str[j][0] == ch) 
 				result.append(str[j].substr(1, str[j].length() - 1)) ;
