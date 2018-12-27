@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Sort_Search.h"
+#include "Myhash.h"
 using namespace std;
 const int LEN = 100;
 int main() {
