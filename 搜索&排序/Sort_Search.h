@@ -1,3 +1,5 @@
+#include <iostream>
+using namespace std;
 void swap(int &a, int &b) {
 	int temp = a;
 	a = b;
@@ -23,13 +25,39 @@ void BubbleSort(int arr[], int i) {
 }
 
 //对有序列表的折半查找
-int OrderBinarySort(int arr[], int i,int j, int target) {
-	int temp = (i+j)/2;
+int OrderBinarySort(int arr[], int i, int j, int target) {
+	int temp = (i + j) / 2;
 	if (i == j && arr[i] != target) return 0;
 	if (arr[temp] < target) return OrderBinarySort(arr, temp + 1, j, target);
-	else if(arr[temp] > target) return OrderBinarySort(arr, i, temp, target);
-	else 
+	else if (arr[temp] > target) return OrderBinarySort(arr, i, temp, target);
+	else
 		return temp;
+}
+ 
+//判断序列是否有序(1代表升序 2代返回表降序 3代表全相等)
+int IsOrdered(int arr[], int n) {
+	int direction = 0; //0代表无序 1代表升序 2代表降序 3代表全相等
+	for (int i = 0; i < n - 1; i++) {
+		if (!(arr[i + 1] - arr[i])) {
+			if (i == n - 2) return 3;
+			else continue;
+		}
+		if (arr[i + 1] - arr[i]>0) direction = 1;
+		else direction = 2;
+		break;
+	}
+	if (direction == 1) {
+		for (int i = 0; i < n - 1; i++) {
+			if (arr[i + 1] - arr[i] < 0) return 0;
+		}
+	}
+	else if (direction == 2) {
+		for (int i = 0; i < n - 1; i++) {
+			if (arr[i + 1] - arr[i] > 0) return 0;
+		}
+	}
+	return direction;
+	
 }
 
 //---------------------------------以下为堆排序------------------------------------------
@@ -133,9 +161,23 @@ int PartSort3(int arr[], int p, int q) {
 //快速排序
 void QuickSort(int arr[], int i, int j) {
 	if (i < j) {
-		int temp = PartSort3(arr, i, j);
+		int temp = PartSort1(arr, i, j);
 		QuickSort(arr, i, temp-1);
 		QuickSort(arr, temp+1, j);
+	}
+}
+
+
+//基于快排的寻找序列第k大的算法(不改变数组的次序)
+void FindNumberK(int arr[], int i, int j, int k) {
+	int mid = PartSort1(arr, i, j);
+	if (i <= j) {//注意i=j时也要有
+		if (j - mid + 1 == k) {
+			cout << arr[mid] << " ";
+			return;
+		}
+		else if (j - mid + 1 > k) FindNumberK(arr, mid+1, j, k);
+		else  FindNumberK(arr, i, mid-1, k-(j-mid+1));
 	}
 }
 
