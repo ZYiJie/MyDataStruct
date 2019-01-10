@@ -1,3 +1,5 @@
+#include <stack>
+using namespace std;
 void swap(int &a, int &b) {
 	int temp = a;
 	a = b;
@@ -22,7 +24,7 @@ void BubbleSort(int arr[], int i) {
 	}
 }
 
-//对有序列表的折半查找
+//对有序列表的折半查找(递归实现)
 int OrderBinarySort(int arr[], int i, int j, int target) {
 	int temp = (i + j) / 2;
 	if (i == j && arr[i] != target) return 0;
@@ -30,6 +32,18 @@ int OrderBinarySort(int arr[], int i, int j, int target) {
 	else if (arr[temp] > target) return OrderBinarySort(arr, i, temp, target);
 	else
 		return temp;
+}
+
+//对有序列表的折半查找(非递归实现)
+int OrderBinarySort2(int arr[], int n, int target) {
+	int mid,start=0,end=n-1;
+	while (start <= end) {
+		mid = (start + end) / 2;
+		if (arr[mid] == target) return mid;
+		else if (arr[mid] < target) start = mid + 1;
+		else if (arr[mid] > target) end = mid - 1;
+	}
+	return 0;
 }
  
 //判断序列是否有序(1代表升序 2代返回表降序 3代表全相等)
@@ -58,7 +72,7 @@ int IsOrdered(int arr[], int n) {
 	
 }
 
-//---------------------------------以下为堆排序------------------------------------------
+//---------------------------------以下为堆排序------------------------------------------//
 
 //构建大根堆
 void MaxHeap(int arr[], int len, int i) {
@@ -84,7 +98,7 @@ void HeapSort(int arr[], int len) {
 	}
 }
 
-//---------------------------以下为插入排序-----------------------
+//---------------------------以下为插入排序-----------------------//
 
 //单次插入
 void Insert(int arr[], int len) {
@@ -118,7 +132,7 @@ void BinarySort(int arr[], int len) {
 	}
 }
 
-//---------------------------以下为快排---------------------------------------
+//---------------------------以下为快排---------------------------------------//
 
 //快排单次排序--左右指针法法
 int PartSort1(int arr[], int p, int q) {
@@ -166,7 +180,34 @@ void QuickSort(int arr[], int i, int j) {
 }
 
 
-//基于快排的寻找序列第k大的算法(不改变数组的次序)
+//快速排序非递归算法
+void QuickSortNotR(int* array, int left, int right)
+{
+	stack<int> s;
+	s.push(left);
+	s.push(right);//后入的right，所以要先拿right
+	while (!s.empty())//栈不为空
+	{
+		int right = s.top();
+		s.pop();
+		int left = s.top();
+		s.pop();
+
+		int index = PartSort1(array, left, right);
+		if ((index - 1) > left)//左子序列
+		{
+			s.push(left);
+			s.push(index - 1);
+		}
+		if ((index)+1 < right)//右子序列
+		{
+		s.push(index + 1);
+		s.push(right);
+		}
+	}
+}
+
+//基于快排的寻找序列第k大的算法
 int FindNumberK(int arr[], int i, int j, int k) {
 	int mid = PartSort1(arr, i, j);
 	if (i <= j) {//注意i=j时也要有
