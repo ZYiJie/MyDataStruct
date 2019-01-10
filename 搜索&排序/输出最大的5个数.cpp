@@ -12,7 +12,7 @@ int main() {
 		cin >> arr[i];
 	}
 	for (i = 1; i <= 5; i++)
-		FindNumberK(arr, 0, n - 1, i);
+		cout<<FindNumberK(arr, 0, n - 1, i)<<" ";
 
 	getchar(); 
 	getchar(); 

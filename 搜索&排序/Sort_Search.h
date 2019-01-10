@@ -1,5 +1,3 @@
-#include <iostream>
-using namespace std;
 void swap(int &a, int &b) {
 	int temp = a;
 	a = b;
@@ -169,17 +167,29 @@ void QuickSort(int arr[], int i, int j) {
 
 
 //基于快排的寻找序列第k大的算法(不改变数组的次序)
-void FindNumberK(int arr[], int i, int j, int k) {
+int FindNumberK(int arr[], int i, int j, int k) {
 	int mid = PartSort1(arr, i, j);
 	if (i <= j) {//注意i=j时也要有
 		if (j - mid + 1 == k) {
-			cout << arr[mid] << " ";
-			return;
+			return arr[mid];
 		}
 		else if (j - mid + 1 > k) FindNumberK(arr, mid+1, j, k);
 		else  FindNumberK(arr, i, mid-1, k-(j-mid+1));
 	}
 }
 
+//--------------------------希尔排序--------------------------//
 
-
+//希尔排序
+void ShellSort(int arr[], int n) {
+	int i, j,temp;
+	for (int gap = n / 2; gap > 0; gap /= 2) {
+		for (i = gap; i < n; i++) {
+			temp = arr[i];
+			for (j = i - gap; j >= 0 && temp < arr[j]; j -= gap) {
+				arr[j + gap] = arr[j];
+			}
+			arr[j + gap] = temp;
+		}
+	}
+}
